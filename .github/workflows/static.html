@@ -1,0 +1,427 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Playmiangam | Наши веб-игры</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #6C63FF;
+            --primary-dark: #564FD8;
+            --secondary: #FF6B8B;
+            --accent: #00D4AA;
+            --dark: #0F0F1E;
+            --darker: #090914;
+            --light: #F5F5FF;
+            --gray: #8A8AA3;
+            --gradient: linear-gradient(135deg, var(--primary), var(--secondary));
+            --glass: rgba(255, 255, 255, 0.08);
+            --glass-border: rgba(255, 255, 255, 0.12);
+            --shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+            --transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', system-ui, sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, var(--darker), var(--dark));
+            color: var(--light);
+            min-height: 100vh;
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Header Styles */
+        header {
+            text-align: center;
+            margin-bottom: 4rem;
+            padding-top: 3rem;
+            position: relative;
+        }
+
+        .logo {
+            font-size: 3.5rem;
+            font-weight: 800;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            margin-bottom: 1rem;
+            display: inline-block;
+            letter-spacing: 2px;
+            position: relative;
+        }
+
+        .logo::after {
+            content: "";
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .tagline {
+            font-size: 1.3rem;
+            opacity: 0.9;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            line-height: 1.5;
+        }
+
+        /* Main Content */
+        .games-section {
+            position: relative;
+            margin-bottom: 4rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: 700;
+            position: relative;
+            display: inline-block;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .section-title::after {
+            content: "";
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .game-card {
+            background: var(--glass);
+            border-radius: 20px;
+            overflow: hidden;
+            transition: var(--transition);
+            backdrop-filter: blur(15px);
+            border: 1px solid var(--glass-border);
+            height: 420px;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            box-shadow: var(--shadow);
+        }
+
+        .game-card::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .game-card:hover {
+            transform: translateY(-15px) scale(1.02);
+            box-shadow: 0 30px 60px rgba(0, 0, 0, 0.3);
+            border-color: rgba(255, 255, 255, 0.2);
+        }
+
+        .game-image {
+            height: 60%;
+            background: linear-gradient(45deg, #1a1a2e, #16213e);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .game-image::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(45deg, transparent 30%, rgba(255,255,255,0.03) 50%, transparent 70%);
+            animation: shimmer 4s infinite linear;
+        }
+
+        .game-icon {
+            font-size: 5rem;
+            opacity: 0.3;
+            z-index: 1;
+        }
+
+        .game-info {
+            padding: 1.8rem;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .game-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.8rem;
+            background: var(--gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .game-description {
+            opacity: 0.8;
+            font-size: 0.95rem;
+            line-height: 1.5;
+            margin-bottom: 1.5rem;
+        }
+
+        .play-button {
+            background: var(--gradient);
+            color: white;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 12px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: var(--transition);
+            width: 100%;
+            font-size: 1.1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .play-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(108, 99, 255, 0.4);
+        }
+
+        /* Empty State */
+        .empty-state {
+            grid-column: 1 / -1;
+            text-align: center;
+            padding: 5rem 3rem;
+            background: var(--glass);
+            border-radius: 24px;
+            margin-top: 2rem;
+            border: 1px solid var(--glass-border);
+            backdrop-filter: blur(15px);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .empty-state::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 5px;
+            background: var(--gradient);
+        }
+
+        .empty-icon {
+            font-size: 5rem;
+            margin-bottom: 2rem;
+            opacity: 0.7;
+            animation: pulse 2s infinite;
+        }
+
+        .empty-title {
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+        }
+
+        .empty-text {
+            opacity: 0.9;
+            max-width: 700px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.7;
+            font-size: 1.1rem;
+        }
+
+        .notification-badge {
+            display: inline-block;
+            background: var(--gradient);
+            padding: 0.8rem 1.5rem;
+            border-radius: 50px;
+            font-weight: 600;
+            color: white;
+            margin-top: 1rem;
+            animation: pulse 2s infinite;
+        }
+
+        /* Footer */
+        footer {
+            text-align: center;
+            margin-top: 5rem;
+            padding: 3rem 0;
+            border-top: 1px solid var(--glass-border);
+            font-size: 1rem;
+            opacity: 0.8;
+            position: relative;
+        }
+
+        footer::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--gradient);
+            border-radius: 2px;
+        }
+
+        /* Animations */
+        @keyframes shimmer {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(100%); }
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+
+        /* Floating Elements */
+        .floating-elements {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            overflow: hidden;
+            z-index: -1;
+        }
+
+        .floating-element {
+            position: absolute;
+            border-radius: 50%;
+            background: var(--gradient);
+            opacity: 0.1;
+            animation: float 15s infinite linear;
+        }
+
+        @keyframes float {
+            0% { transform: translateY(0) rotate(0deg); }
+            100% { transform: translateY(-1000px) rotate(720deg); }
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 2.5rem;
+            }
+            
+            .games-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .container {
+                padding: 1.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-elements">
+        <!-- Floating background elements -->
+        <div class="floating-element" style="width: 100px; height: 100px; top: 10%; left: 5%; animation-delay: 0s;"></div>
+        <div class="floating-element" style="width: 150px; height: 150px; top: 20%; right: 10%; animation-delay: -3s;"></div>
+        <div class="floating-element" style="width: 80px; height: 80px; bottom: 30%; left: 15%; animation-delay: -6s;"></div>
+        <div class="floating-element" style="width: 120px; height: 120px; bottom: 10%; right: 20%; animation-delay: -9s;"></div>
+    </div>
+    
+    <div class="container">
+        <header>
+            <h1 class="logo">PLAYMIANGAM</h1>
+            <p class="tagline">Погрузитесь в мир наших уникальных игр. Инновационный геймплей, захватывающие сюжеты и непревзойденная графика ждут вас.</p>
+        </header>
+        
+        <main>
+            <section class="games-section">
+                <h2 class="section-title">Наши веб-игры</h2>
+                
+                <div class="games-grid">
+                    <!-- Карточки игр будут здесь -->
+                    <!-- Пока пусто -->
+                    
+                    <div class="empty-state">
+                        <div class="empty-icon">🚀</div>
+                        <h3 class="empty-title">Игры в веб-версии пока не опубликованы</h3>
+                        <p class="empty-text">Наша команда усердно трудится над созданием потрясающих веб-игр, которые превзойдут все ваши ожидания. Скоро здесь появятся первые проекты, созданные с любовью и вниманием к деталям.</p>
+                        <p class="empty-text">Следите за обновлениями, чтобы первыми узнать о запуске!</p>
+                        <div class="notification-badge">Скоро будет доступно</div>
+                    </div>
+                </div>
+            </section>
+        </main>
+        
+        <footer>
+            <p>Playmiangam &copy; 2023-2025. Все права защищены. Инновации в каждом пикселе.</p>
+        </footer>
+    </div>
+
+    <script>
+        // Создание плавающих элементов
+        document.addEventListener('DOMContentLoaded', function() {
+            const floatingContainer = document.querySelector('.floating-elements');
+            const colors = ['#6C63FF', '#FF6B8B', '#00D4AA'];
+            
+            for (let i = 0; i < 8; i++) {
+                const size = Math.random() * 80 + 40;
+                const element = document.createElement('div');
+                element.classList.add('floating-element');
+                element.style.width = `${size}px`;
+                element.style.height = `${size}px`;
+                element.style.top = `${Math.random() * 100}%`;
+                element.style.left = `${Math.random() * 100}%`;
+                element.style.background = colors[Math.floor(Math.random() * colors.length)];
+                element.style.opacity = Math.random() * 0.1 + 0.05;
+                element.style.animationDuration = `${Math.random() * 30 + 15}s`;
+                element.style.animationDelay = `-${Math.random() * 20}s`;
+                
+                floatingContainer.appendChild(element);
+            }
+        });
+    </script>
+</body>
+</html>
